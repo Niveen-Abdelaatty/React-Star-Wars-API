@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import { useState, useEffect } from 'react';
+import { getAllStarships } from './services/sw-api';
+
+import Starships from './components/Starships';
+
 import './App.css';
 
 function App() {
+  const [starships, setStarships] = useState(null);
+
+  useEffect(() => {
+    const fetchStarships = async () => {
+      const fetchedStarships = await getAllStarships();
+      console.log(fetchedStarships);
+
+      setStarships(fetchedStarships);
+    };
+    fetchStarships();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <h1>Results</h1>
+      {starships && <Starships starships={starships} />}
     </div>
   );
 }
