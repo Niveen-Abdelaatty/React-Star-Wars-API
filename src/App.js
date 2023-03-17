@@ -4,6 +4,7 @@ import { getAllStarships } from './services/sw-api';
 import Starships from './components/Starships';
 
 import './App.css';
+import { Container } from 'react-bootstrap';
 
 function App() {
   const [starships, setStarships] = useState(null);
@@ -20,8 +21,10 @@ function App() {
 
   return (
     <div className='App'>
-      <h1>Results</h1>
-      {starships && <Starships starships={starships} />}
+      <h1>STAR WARS STARSHIPS</h1>
+      <Container>
+        {starships && <Starships starships={starships} />}
+      </Container>
     </div>
   );
 }
